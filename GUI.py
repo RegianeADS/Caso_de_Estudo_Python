@@ -4,7 +4,6 @@ import crud as crud
 
 class PrincipalBD:
     def __init__(self, win): #construtor desta classe
-        self.objBD = crud.AppBD()
         
         self.lbCodigo=tk.Label(win, text='Número do Brinco')
         self.lblNome=tk.Label(win, text='Sexo do animal')

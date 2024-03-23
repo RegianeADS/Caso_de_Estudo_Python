@@ -8,6 +8,32 @@ print("Tabela criada com sucesso!")
 conn.commit()
 conn.close()
 
+from faker import Faker
+import psycopg2
+
+conn = psycopg2.connect(database = "postgres", user = "postgres", password = "9513", host = "127.0.0.1", port = "5432")
+print("Conexão aberta com sucesso!")
+cursor = conn.cursor()
+fake = Faker('pt_BR')
+
+n=10
+for i in range(n):
+    BRINCO = i+10
+    SEXO = 'RECRIA_'+str(i+1)
+    PESO = fake.pyfloat(left_digits=3, right_digits=2, positive=True, min_value=5, max_value=1000)
+    print(PESO)
+    print(SEXO)
+
+    comandoSQL = """ INSERT INTO PUBLIC. "RECRIA" ("BRINCO", "SEXO", "PESO") VALUES (%s, %s, %s)"""
+    registro = (BRINCO, SEXO, PESO)
+    cursor.execute(comandoSQL, registro)
+
+conn.commit()
+print("Inserção realizada com sucesso!");
+conn.close()
+
+
+
 class AppBD: # classe pra método CRUD
     def  __init__(self) :
         print  ('Método construtor')
